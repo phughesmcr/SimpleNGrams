@@ -1,0 +1,26 @@
+{
+  "name": "simplengrams",
+  "version": "0.0.1",
+  "description": "The easiest wat to get n-grams from strings",
+  "main": "index.js",
+  "keywords": [
+    "n-grams",
+    "ngrams",
+    "ngram",
+    "bigrams",
+    "trigrams",
+    "easy",
+    "simple"
+  ],
+  "author": "P. Hughes",
+  "license": "CC-BY-NC-SA-3.0",
+  "dependencies": {
+    "happynodetokenizer": "^0.1.2"
+  },
+  "homepage": "https://github.com/phugh/simplengrams",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phugh/simplengrams"
+  }
+
+}
