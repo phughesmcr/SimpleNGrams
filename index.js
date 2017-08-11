@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.0.1
+ * v0.0.2
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -84,5 +84,4 @@
   } else {
     root.simplengrams = simplengrams
   }
-  console.log(simplengrams("In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.", 2))
 }).call(this)
