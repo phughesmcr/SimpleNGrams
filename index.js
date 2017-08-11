@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.0.2
+ * v0.0.3
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -33,9 +33,16 @@
     } else throw new Error('simplengrams requires happynodetokenizer')
   }
 
+  /**
+   * @function getNgrams
+   * @param  {Array} arr array of tokens
+   * @param  {Number} n number of grams
+   * @return {Array} array of n-grams
+   */
   function getNgrams (arr, n) {
     n -= 1
     const ngrams = []
+
     const mainLoop = i => {
       const a = []
       let h = 0
@@ -45,9 +52,13 @@
       }
       return a
     }
-    for (let i = 0; i < (arr.length - n); i++) {
+
+    let i = 0
+    const len = arr.length - n
+    for (i; i < len; i++) {
       ngrams.push(mainLoop(i))
     }
+
     return ngrams
   }
 
@@ -63,12 +74,8 @@
     if (typeof str !== 'string') str = str.toString()
     if (n == null) n = 2 // default to bigrams
     if (typeof num !== 'number') n = Number(n)
-    // convert our string to tokens
-    const tokens = tokenizer(str)
-    // Get those n-grams!
-    const grams = getNgrams(tokens, n)
-    // return grams array
-    return grams
+    const tokens = tokenizer(str) // convert our string to tokens
+    return getNgrams(tokens, n)
   }
 
   simplengrams.noConflict = function () {
