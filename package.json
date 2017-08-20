@@ -1,6 +1,6 @@
 {
   "name": "simplengrams",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "The easiest wat to get n-grams from strings",
   "main": "index.js",
   "keywords": [
@@ -15,12 +15,11 @@
   "author": "P. Hughes",
   "license": "CC-BY-NC-SA-3.0",
   "dependencies": {
-    "happynodetokenizer": "^0.1.2"
+    "happynodetokenizer": "^0.2.0"
   },
   "homepage": "https://github.com/phugh/simplengrams",
   "repository": {
     "type": "git",
     "url": "https://github.com/phugh/simplengrams"
   }
-
 }

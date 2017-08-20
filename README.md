@@ -15,10 +15,11 @@ console.log(bigrams, trigrams)
 ### Input
 ```javascript
 const sng = require('simplengrams')
-const text = "In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters."
+const text = "In the beginning God created the heavens and the earth."
 const bigrams = sng(text, 2)
 console.log(bigrams)
 ```
+
 ### Bigram Output
 ```javascript
 [
@@ -31,39 +32,11 @@ console.log(bigrams)
   [ 'heavens', 'and' ],
   [ 'and', 'the' ],
   [ 'the', 'earth' ],
-  [ 'earth', '.' ],
-  [ '.', 'Now' ],
-  [ 'Now', 'the' ],
-  [ 'the', 'earth' ],
-  [ 'earth', 'was' ],
-  [ 'was', 'formless' ],
-  [ 'formless', 'and' ],
-  [ 'and', 'empty' ],
-  [ 'empty', ',' ],
-  [ ',', 'darkness' ],
-  [ 'darkness', 'was' ],
-  [ 'was', 'over' ],
-  [ 'over', 'the' ],
-  [ 'the', 'surface' ],
-  [ 'surface', 'of' ],
-  [ 'of', 'the' ],
-  [ 'the', 'deep' ],
-  [ 'deep', ',' ],
-  [ ',', 'and' ],
-  [ 'and', 'the' ],
-  [ 'the', 'Spirit' ],
-  [ 'Spirit', 'of' ],
-  [ 'of', 'God' ],
-  [ 'God', 'was' ],
-  [ 'was', 'hovering' ],
-  [ 'hovering', 'over' ],
-  [ 'over', 'the' ],
-  [ 'the', 'waters' ],
-  [ 'waters', '.' ]
+  [ 'earth', '.' ]
 ]
 ```
 
 ## Licence
-[P. Hughes](https://www.phugh.es) (C) 2017.
+(C) 2017 [P. Hughes](https://www.phugh.es).
 
 [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-nc-sa/3.0/).
