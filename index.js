@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.1.0
+ * v0.1.1
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -16,8 +16,8 @@
  * const trigrams = sng(txt, 3);
  * console.log(bigrams, trigrams);
  *
- * @param {string} str input string
- * @param {number} n number of grams - unigrams = 1, bigrams = 2 etc.
+ * @param {string} str  input string
+ * @param {number} n    number of grams - unigrams = 1, bigrams = 2 etc.
  * @return {Array} array of n-grams
  */
 
@@ -35,8 +35,8 @@
 
   /**
    * @function getNgrams
-   * @param  {Array} arr array of tokens
-   * @param  {Number} n number of grams
+   * @param  {Array} arr  array of tokens
+   * @param  {Number} n   number of grams
    * @return {Array} array of n-grams
    */
   function getNgrams(arr, n) {
@@ -63,16 +63,22 @@
   /**
    * @function simplengrams
    * @param  {string} str input string
-   * @param  {number} n number of grams
+   * @param  {number} n   n-gram length
    * @return {Array} array of n-grams
    */
   function simplengrams(str, n) {
-    if (!str) return null;
+    if (!str) {
+      console.error('simpleNGrams needs input! Returning null.');
+      return null;
+    }
     if (typeof str !== 'string') str = str.toString();
-    if (!n) n = 2; // default to bigrams
-    if (typeof num !== 'number') n = Number(n);
+    n = n || 2; // default to bigrams
+    if (typeof n !== 'number') n = Number(n);
     const tokens = tokenizer(str); // convert our string to tokens
-    if (tokens.length <= 0) return null;
+    if (tokens.length <= 0 || !tokens) {
+      console.warn('simpleNGrams found no tokens, returning null.');
+      return null;
+    }
     return getNgrams(tokens, n);
   }
 

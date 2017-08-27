@@ -1,6 +1,6 @@
 {
   "name": "simplengrams",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The easiest wat to get n-grams from strings",
   "main": "index.js",
   "keywords": [
