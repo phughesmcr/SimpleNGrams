@@ -11,6 +11,8 @@ const trigrams = sng(text, 3);
 console.log(bigrams, trigrams);
 ```
 
+If the n-gram size (i.e. '2' or '3' in the example above) is greater than the length of the input string, an empty array is returned.
+
 ## Example
 ### Input
 ```javascript

@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.1.1
+ * v0.1.2
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -17,7 +17,7 @@
  * console.log(bigrams, trigrams);
  *
  * @param {string} str  input string
- * @param {number} n    number of grams - unigrams = 1, bigrams = 2 etc.
+ * @param {number} n    size of ngrams - unigrams = 1, bigrams = 2 etc.
  * @return {Array} array of n-grams
  */
 
@@ -36,37 +36,33 @@
   /**
    * @function getNgrams
    * @param  {Array} arr  array of tokens
-   * @param  {Number} n   number of grams
+   * @param  {Number} n   size of n-grams
    * @return {Array} array of n-grams
    */
   function getNgrams(arr, n) {
-    --n;
     const ngrams = [];
-
     const mainLoop = (i) => {
       const a = [];
-      const x = n + 1;
-      for (let h = 0; h < x; h++) {
+      for (let h = 0; h < n; h++) {
         a.push(arr[(i + n) + (h - n)]);
       }
       return a;
     };
-
-    const len = arr.length - n;
+    const len = arr.length - n + 1;
     for (let i = 0; i < len; i++) {
       ngrams.push(mainLoop(i));
     }
-
     return ngrams;
   }
 
   /**
    * @function simplengrams
    * @param  {string} str input string
-   * @param  {number} n   n-gram length
+   * @param  {number} n   n-gram size
    * @return {Array} array of n-grams
    */
   function simplengrams(str, n) {
+    // error handling
     if (!str) {
       console.error('simpleNGrams needs input! Returning null.');
       return null;
@@ -74,11 +70,14 @@
     if (typeof str !== 'string') str = str.toString();
     n = n || 2; // default to bigrams
     if (typeof n !== 'number') n = Number(n);
-    const tokens = tokenizer(str); // convert our string to tokens
-    if (tokens.length <= 0 || !tokens) {
-      console.warn('simpleNGrams found no tokens, returning null.');
+    // tokenize!
+    const tokens = tokenizer(str);
+    if (!tokens) {
+      console.warn('simpleNGrams found no tokens. Returning null.');
       return null;
     }
+    // return n-gram arrays!
+    if (n > tokens.length) console.warn('simpleNgrams: \'n\' is greater than length of text. Returning empty array!');
     return getNgrams(tokens, n);
   }
 
