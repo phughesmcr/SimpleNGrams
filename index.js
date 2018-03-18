@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.1.2
+ * v0.1.3
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -21,8 +21,8 @@
  * @return {Array} array of n-grams
  */
 
-'use strict'
-;(function() {
+(function() {
+  'use strict';
   const global = this;
   const previous = global.simplengrams;
   let tokenizer = global.tokenizer;
@@ -41,13 +41,20 @@
    */
   function getNgrams(arr, n) {
     const ngrams = [];
-    const mainLoop = (i) => {
+
+    /**
+     * @function mainLoop
+     * @param  {number} i
+     * @return {array} array of n-grams
+     */
+    function mainLoop(i) {
       const a = [];
       for (let h = 0; h < n; h++) {
         a.push(arr[(i + n) + (h - n)]);
       }
       return a;
-    };
+    }
+
     const len = arr.length - n + 1;
     for (let i = 0; i < len; i++) {
       ngrams.push(mainLoop(i));
