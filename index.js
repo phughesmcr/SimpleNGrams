@@ -1,12 +1,12 @@
 /**
  * SimpleNgrams
- * v0.1.3
+ * v0.2.0
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
  *
- * (C) 2017 P. Hughes
- * Licence : Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported
+ * (C) 2017-18 P. Hughes
+ * License : Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported
  * http://creativecommons.org/licenses/by-nc-sa/3.0/
  *
  * Usage example:
@@ -23,15 +23,7 @@
 
 (function() {
   'use strict';
-  const global = this;
-  const previous = global.simplengrams;
-  let tokenizer = global.tokenizer;
-
-  if (typeof lexicon === 'undefined') {
-    if (typeof require !== 'undefined') {
-      tokenizer = require('happynodetokenizer');
-    } else throw new Error('simplengrams requires happynodetokenizer');
-  }
+  const tokenizer = require('happynodetokenizer');
 
   /**
    * @function getNgrams
@@ -88,11 +80,6 @@
     return getNgrams(tokens, n);
   }
 
-  simplengrams.noConflict = function() {
-    global.simplengrams = previous;
-    return simplengrams;
-  };
-
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = simplengrams;
@@ -101,4 +88,4 @@
   } else {
     global.simplengrams = simplengrams;
   }
-}).call(this);
+})();
