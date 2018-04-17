@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.3.1
+ * v0.3.2
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -82,7 +82,7 @@
     if (typeof str !== 'string') str = str.toString();
     if (typeof n !== 'number') n = Number(n);
     // tokenize!
-    const tokens = tokenizer(str);
+    const tokens = tokenizer(str, {logs: opts.logs});
     if (!tokens) {
       if (opts.logs > 1) console.warn('simpleNGrams found no tokens. Returning empty 2d array: [[]].');
       return [[]];
