@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.3.0
+ * v0.3.1
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
