@@ -1,6 +1,6 @@
 {
   "name": "simplengrams",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The easiest wat to get n-grams from strings",
   "main": "index.js",
   "keywords": [
@@ -10,7 +10,8 @@
     "bigrams",
     "trigrams",
     "easy",
-    "simple"
+    "simple",
+    "NLP"
   ],
   "author": "P. Hughes",
   "license": "CC-BY-NC-SA-3.0",

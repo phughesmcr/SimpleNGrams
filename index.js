@@ -1,6 +1,6 @@
 /**
  * SimpleNgrams
- * v0.2.0
+ * v0.3.0
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -10,14 +10,23 @@
  * http://creativecommons.org/licenses/by-nc-sa/3.0/
  *
  * Usage example:
- * const sng = require('simplengrams');
+ * const ngrams = require('simplengrams');
  * const txt = 'A string of text, any text what so ever!';
- * const bigrams = sng(txt, 2);
- * const trigrams = sng(txt, 3);
+ * const opts = {logs: 3};
+ * const bigrams = ngrams(txt, 2, opts);
+ * const trigrams = ngrams(txt, 3, opts);
  * console.log(bigrams, trigrams);
+ * 
+ * Options:
+ * 
+ *    "logs": 3,          // 0 = suppress all logs
+ *                        // 1 = print errors only
+ *                        // 2 = print errors and warnings
+ *                        // 3 = print all console logs
  *
  * @param {string} str  input string
- * @param {number} n    size of ngrams - unigrams = 1, bigrams = 2 etc.
+ * @param {Number} n    size of ngrams - unigrams = 1, bigrams = 2 etc.
+ * @param {Object} opts options object
  * @return {Array} array of n-grams
  */
 
@@ -27,8 +36,8 @@
 
   /**
    * @function getNgrams
-   * @param  {Array} arr  array of tokens
-   * @param  {Number} n   size of n-grams
+   * @param {Array} arr  array of tokens
+   * @param {Number} n   size of n-grams
    * @return {Array} array of n-grams
    */
   function getNgrams(arr, n) {
@@ -56,27 +65,30 @@
 
   /**
    * @function simplengrams
-   * @param  {string} str input string
-   * @param  {number} n   n-gram size
+   * @param {string} str input string
+   * @param {Number} n   n-gram size
+   * @param {Object} opts options object
    * @return {Array} array of n-grams
    */
-  function simplengrams(str, n) {
+  function simplengrams(str, n = 2, opts = {}) {
+    // default options
+    opts.logs = (typeof opts.logs !== 'undefined') ? opts.logs : 3;
+    n = (typeof n !== 'undefined') ? n : 2; // default to bigrams
     // error handling
     if (!str) {
-      console.error('simpleNGrams needs input! Returning null.');
-      return null;
+      if (opts.logs > 0) console.error('simpleNGrams needs input! Returning empty 2d array: [[]].');
+      return [[]];
     }
     if (typeof str !== 'string') str = str.toString();
-    n = n || 2; // default to bigrams
     if (typeof n !== 'number') n = Number(n);
     // tokenize!
     const tokens = tokenizer(str);
     if (!tokens) {
-      console.warn('simpleNGrams found no tokens. Returning null.');
-      return null;
+      if (opts.logs > 1) console.warn('simpleNGrams found no tokens. Returning empty 2d array: [[]].');
+      return [[]];
     }
     // return n-gram arrays!
-    if (n > tokens.length) console.warn('simpleNgrams: \'n\' is greater than length of text. Returning empty array!');
+    if (n > tokens.length && opts.logs > 1) console.warn('simpleNgrams: \'n\' is greater than length of text. Returning empty 2d array: [[]]');
     return getNgrams(tokens, n);
   }
 
