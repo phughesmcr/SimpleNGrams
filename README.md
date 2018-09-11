@@ -1,11 +1,11 @@
 # SimleNGrams
 
-The easiest way of getting an array of n-grams from a string!
+The easiest way to get an array of n-grams from a string!
 
 ## Useage
 ```javascript
 const sng = require('simplengrams');
-const txt = 'A string of text...';
+const text = 'A string of text...';
 const bigrams = sng(text, 2);
 const trigrams = sng(text, 3);
 console.log(bigrams, trigrams);
