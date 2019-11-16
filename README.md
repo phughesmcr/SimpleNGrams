@@ -2,13 +2,18 @@
 
 The easiest way to get an array of n-grams from a string!
 
+## Install
+```bash
+  npm install --save simplengrams
+```
+
 ## Usage
 
 ### Asynchronous
 ```javascript
 const sng = require('simplengrams');
 const text = 'A string of text...';
-const opts = {logs: 3, strict: false};
+const opts = {logs: 3, normalise: true, strict: false};
 const bigrams = await sng.ngrams(text, 2, opts);
 console.log(bigrams);
 ```
@@ -18,7 +23,7 @@ Or, with `.then()` and `.catch()`:
 ```javascript
 const sng = require('simplengrams');
 const text = 'A string of text...';
-const opts = {logs: 3, strict: false};
+const opts = {logs: 3, normalise: true, strict: false};
 sng.ngrams(text, 3, opts)
   .then((arr) => {
     console.log(trigrams);
@@ -33,7 +38,7 @@ sng.ngrams(text, 3, opts)
 ```javascript
 const sng = require('simplengrams');
 const text = 'A string of text...';
-const opts = {logs: 3, strict: false};
+const opts = {logs: 3, normalise: true, strict: false};
 const bigrams = sng.ngramsSync(text, 2, opts);
 console.log(bigrams);
 ```
@@ -46,7 +51,7 @@ If the n-gram size (i.e. '2' in the example above) is greater than the length of
 ```javascript
 const sng = require('simplengrams');
 const text = 'A string of text...';
-const opts = {logs: 3, strict: false};
+const opts = {logs: 3, normalise: true, strict: false};
 ngramsSync(text, 2, opts, function(err, bigrams) {
   console.log(bigrams);
 });
@@ -57,7 +62,7 @@ ngramsSync(text, 2, opts, function(err, bigrams) {
 ```javascript
 const sng = require('simplengrams');
 const text = 'In the beginning God created the heavens and the earth.';
-const opts = {logs: 3, strict: false};
+const opts = {logs: 3, normalise: true, strict: false};
 const bigrams = sng(text, 2, opts);
 console.log(bigrams);
 ```
