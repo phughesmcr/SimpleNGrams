@@ -1,9 +1,10 @@
 ### Project Specific Ignores
-node_modules/
 .vscode/
+node_modules/
+test/*
+!test/test.js
 .npm
 .env
-test.js
 
 ### Ignore OS X Files
 *.DS_Store
