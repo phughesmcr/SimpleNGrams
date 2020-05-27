@@ -61,7 +61,7 @@
         if (end !== undefined) tokens.push(end);
       }
     }
-    const len = tokens.length - (n + 1);
+    const len = (tokens.length - n) + 1;
     for (let i = 0; i < len; i++) {
       const grams = [];
       for (let j = 0; j < n; j++) {
