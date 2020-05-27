@@ -1,6 +1,6 @@
 {
   "name": "simplengrams",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "The easiest way to get n-gram chunks from strings or token arrays!",
   "main": "index.js",
   "files": [

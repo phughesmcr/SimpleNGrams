@@ -1,7 +1,7 @@
 /**
  * @preserve
  * SimpleNGrams
- * v2.0.1
+ * v2.0.2
  *
  * Help me make this better:
  * https://github.com/phugh/simplengrams
@@ -13,7 +13,7 @@
  * @name         SimpleNGrams
  * @file         index.js
  * @description  Returns a 2d array of n-grams
- * @version      2.0.1
+ * @version      2.0.2
  * @exports      (from|fromSync)
  * @requires     happynodetokenizer
  * @author       P. Hughes <peter@phugh.es> (https://www.phugh.es)
