@@ -37,8 +37,7 @@
     ['the', 'heavens'],
     ['heavens', 'and'],
     ['and', 'the'],
-    ['the', 'earth'],
-    ['earth', '.'],
+    ['the', 'earth.'],
   ];
   const simpleBigramResultsPadded = [
     [null, 'In'],
@@ -50,9 +49,8 @@
     ['the', 'heavens'],
     ['heavens', 'and'],
     ['and', 'the'],
-    ['the', 'earth'],
-    ['earth', '.'],
-    ['.', null],
+    ['the', 'earth.'],
+    ['earth.', null],
   ];
   const simpleBigramResultsCustom = [
     ['In', 'the'],
@@ -63,9 +61,8 @@
     ['the', 'heavens'],
     ['heavens', 'and'],
     ['and', 'the'],
-    ['the', 'earth'],
-    ['earth', '.'],
-    ['.', 'END'],
+    ['the', 'earth.'],
+    ['earth.', 'END'],
   ];
   const simpleTrigramResults = [
     ['In', 'the', 'beginning'],
@@ -75,8 +72,7 @@
     ['created', 'the', 'heavens'],
     ['the', 'heavens', 'and'],
     ['heavens', 'and', 'the'],
-    ['and', 'the', 'earth'],
-    ['the', 'earth', '.'],
+    ['and', 'the', 'earth.'],
   ];
   const simpleTrigramResultsPadded = [
     [null, null, 'In'],
@@ -89,9 +85,8 @@
     ['the', 'heavens', 'and'],
     ['heavens', 'and', 'the'],
     ['and', 'the', 'earth'],
-    ['the', 'earth', '.'],
-    ['earth', '.', null],
-    ['.', null, null],
+    ['the', 'earth.', null],
+    ['earth.', null, null],
   ];
   const simpleTrigramResultsCustom = [
     ['START', 'START', 'In'],
@@ -103,10 +98,9 @@
     ['created', 'the', 'heavens'],
     ['the', 'heavens', 'and'],
     ['heavens', 'and', 'the'],
-    ['and', 'the', 'earth'],
-    ['the', 'earth', '.'],
-    ['earth', '.', 'END'],
-    ['.', 'END', 'END'],
+    ['and', 'the', 'earth.'],
+    ['the', 'earth.', 'END'],
+    ['earth.', 'END', 'END'],
   ];
 
   /* eslint-disable indent */
