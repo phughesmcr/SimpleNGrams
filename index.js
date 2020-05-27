@@ -33,6 +33,35 @@
   'use strict';
 
   /**
+   * Pad an array
+   * @function _pad
+   * @private
+   * @param {Array} arr
+   * @param {number} n gram size
+   * @param {boolean | Array<any>} pad add padding to start and end of output
+   * @return {Array} padded array
+   */
+  const _pad = (arr, n, pad) => {
+    let start = null;
+    let end = null;
+    if (Array.isArray(pad)) {
+      if (pad.length === 2) {
+        start = pad[0];
+        end = pad[1];
+      } else if (pad.length === 1) {
+        start = end = pad[0];
+      } else {
+        throw new Error(`Wrong number of elements in pad array. Expected 1 or 2, found ${pad.length}.`);
+      }
+    }
+    for (let i = 1; i < n; i++) {
+      if (start !== undefined) arr.unshift(start);
+      if (end !== undefined) arr.push(end);
+    }
+    return arr;
+  }
+
+  /**
    * @function _splitter
    * @private
    * @param {Array<string>} tokens array of strings
@@ -42,25 +71,11 @@
    */
   const _splitter = (tokens, n, pad) => {
     const output = [];
-    const padIsArray = Array.isArray(pad);
-    if (pad === true || padIsArray) {
-      let start = null;
-      let end = null;
-      if (padIsArray) {
-        if (pad.length === 2) {
-          start = pad[0];
-          end = pad[1];
-        } else if (pad.length === 1) {
-          start = end = pad[0];
-        } else {
-          throw new Error(`Wrong number of elements in pad array. Expected 1 or 2, found ${pad.length}.`);
-        }
-      }
-      for (let i = 1; i < n; i++) {
-        if (start !== undefined) tokens.unshift(start);
-        if (end !== undefined) tokens.push(end);
-      }
+    // pad array if requested
+    if (pad === true || Array.isArray(pad)) {
+      tokens = _pad(tokens, n, pad);
     }
+
     const len = (tokens.length - n) + 1;
     for (let i = 0; i < len; i++) {
       const grams = [];
@@ -73,12 +88,12 @@
   };
 
   /**
-   * @function _validateInput
+   * @function _isInputValid
    * @private
-   * @param {string | Array<string>} input
-   * @return {boolean}
+   * @param {string | Array<string>} input input to test
+   * @return {boolean} returns true if input is valid
    */
-  const _validateInput = (input) => {
+  const _isInputValid = (input) => {
     if (
       !input ||
       (!Array.isArray(input) && typeof input !== 'string') ||
@@ -97,13 +112,13 @@
    * @public
    * @param {string | Array<string>} input non-empty string or array of strings
    * @param {number} [n=2] gram size - defaults to bigrams (n=2)
-   * @param {boolean | Array<any>} [pad] pad start and end of output?
-   * @param {string | RegExp} [splitPattern] pattern used to split strings into tokens - defaults to spaces
+   * @param {boolean | Array<any>} [pad=false] pad start and end of output?
+   * @param {string | RegExp} [splitPattern=" "] pattern used to split strings into tokens - defaults to spaces
    * @return {Array<Array<string>>}
    */
   const fromSync = (input, n = 2, pad = false, splitPattern = ' ') => {
-    if (!_validateInput(input)) {
-      throw new TypeError(`No valid input found. Expected non-empty string or array of non-empty string, found ${typeof input}.`);
+    if (!_isInputValid(input)) {
+      throw new TypeError(`No valid input found. Expected non-empty string or array of non-empty strings, found ${typeof input}.`);
     } else {
       let tokens;
       if (typeof input === 'string') {
@@ -125,8 +140,8 @@
    * @async
    * @param {string | Array<string>} input non-empty string or array of strings
    * @param {number} [n=2] gram size - defaults to bigrams (n=2)
-   * @param {boolean | Array<any>} [pad] pad start and end of output?
-   * @param {string | RegExp} [splitPattern] pattern used to split strings into tokens - defaults to spaces
+   * @param {boolean | Array<any>} [pad=false] pad start and end of output?
+   * @param {string | RegExp} [splitPattern=" "] pattern used to split strings into tokens - defaults to spaces
    * @return {Promise<Array<Array<string>>>}
    */
   const from = async (input, n = 2, pad = false, splitPattern = ' ') => {
