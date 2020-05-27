@@ -3,11 +3,16 @@
   const ngrams = require('../index.js');
 
   /**
-   * @param {any} a
-   * @param {any} b
+   * @param {Array} a the input
+   * @param {Array} b the example to test against
    * @return {boolean}
    */
   const deepCompare = (a, b) => {
+    if (typeof a !== typeof b) {
+      throw new Error(`Cannot compare elements of different types. Expected ${typeof b}, got ${typeof a}.`);
+    } else if (Array.isArray(a) && Array.isArray(b) && (a.length !== b.length)) {
+      throw new Error(`Arrays were different lengths! Expected ${b.length}, got ${a.length}.`);
+    }
     for (let i = 0; i < a.length; i++) {
       if (Array.isArray(a[i]) && Array.isArray(b[i])) {
         return deepCompare(a[i], b[i]);
@@ -107,7 +112,7 @@
   /* eslint-disable indent */
   /** TESTS */
 
-    /** SIMPLE */
+  /** SIMPLE */
 
       /** ASYNC */
 
