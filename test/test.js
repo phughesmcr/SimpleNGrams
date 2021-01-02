@@ -1,194 +1,149 @@
-(async () => {
-  'use strict';
-  const ngrams = require('../index.js');
+'use strict';
+import { ngram, nGram } from '../dist/esm/index.min.js'
 
-  /**
-   * @param {Array} a the input
-   * @param {Array} b the example to test against
-   * @return {boolean}
-   */
-  const deepCompare = (a, b) => {
-    if (typeof a !== typeof b) {
-      throw new Error(`Cannot compare elements of different types. Expected ${typeof b}, got ${typeof a}.`);
-    } else if (Array.isArray(a) && Array.isArray(b) && (a.length !== b.length)) {
-      throw new Error(`Arrays were different lengths! Expected ${b.length}, got ${a.length}.`);
+/**
+ * @param {Array} a the input
+ * @param {Array} b the example to test against
+ * @return {boolean}
+ */
+const deepCompare = (a, b) => {
+  if (typeof a !== typeof b) {
+    throw new Error(`Cannot compare elements of different types. Expected ${typeof b}, got ${typeof a}.`);
+  } else if (Array.isArray(a) && Array.isArray(b) && (a.length !== b.length)) {
+    throw new Error(`Arrays were different lengths! Expected ${b.length}, got ${a.length}.`);
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (Array.isArray(a[i]) && Array.isArray(b[i])) {
+      return deepCompare(a[i], b[i]);
     }
-    for (let i = 0; i < a.length; i++) {
-      if (Array.isArray(a[i]) && Array.isArray(b[i])) {
-        return deepCompare(a[i], b[i]);
-      }
-      if (a[i] !== b[i]) {
-        throw new Error(`Found ${a[i]}, expected ${b[i]}`);
-      }
+    if (a[i] !== b[i]) {
+      throw new Error(`Found ${a[i]}, expected ${b[i]}`);
     }
-    return true;
-  };
+  }
+  return true;
+};
 
-  /* TEST INPUTS */
-  const simpleStr = 'In the beginning God created the heavens and the earth.';
+/* TEST INPUTS */
+const simpleStr = 'In the beginning God created the heavens and the earth.';
 
-  /* EXPECTED TEST OUTPUTS */
-  const simpleBigramResults = [
-    ['In', 'the'],
-    ['the', 'beginning'],
-    ['beginning', 'God'],
-    ['God', 'created'],
-    ['created', 'the'],
-    ['the', 'heavens'],
-    ['heavens', 'and'],
-    ['and', 'the'],
-    ['the', 'earth.'],
-  ];
-  const simpleBigramResultsPadded = [
-    [null, 'In'],
-    ['In', 'the'],
-    ['the', 'beginning'],
-    ['beginning', 'God'],
-    ['God', 'created'],
-    ['created', 'the'],
-    ['the', 'heavens'],
-    ['heavens', 'and'],
-    ['and', 'the'],
-    ['the', 'earth.'],
-    ['earth.', null],
-  ];
-  const simpleBigramResultsCustom = [
-    ['In', 'the'],
-    ['the', 'beginning'],
-    ['beginning', 'God'],
-    ['God', 'created'],
-    ['created', 'the'],
-    ['the', 'heavens'],
-    ['heavens', 'and'],
-    ['and', 'the'],
-    ['the', 'earth.'],
-    ['earth.', 'END'],
-  ];
-  const simpleTrigramResults = [
-    ['In', 'the', 'beginning'],
-    ['the', 'beginning', 'God'],
-    ['beginning', 'God', 'created'],
-    ['God', 'created', 'the'],
-    ['created', 'the', 'heavens'],
-    ['the', 'heavens', 'and'],
-    ['heavens', 'and', 'the'],
-    ['and', 'the', 'earth.'],
-  ];
-  const simpleTrigramResultsPadded = [
-    [null, null, 'In'],
-    [null, 'In', 'the'],
-    ['In', 'the', 'beginning'],
-    ['the', 'beginning', 'God'],
-    ['beginning', 'God', 'created'],
-    ['God', 'created', 'the'],
-    ['created', 'the', 'heavens'],
-    ['the', 'heavens', 'and'],
-    ['heavens', 'and', 'the'],
-    ['and', 'the', 'earth'],
-    ['the', 'earth.', null],
-    ['earth.', null, null],
-  ];
-  const simpleTrigramResultsCustom = [
-    ['START', 'START', 'In'],
-    ['START', 'In', 'the'],
-    ['In', 'the', 'beginning'],
-    ['the', 'beginning', 'God'],
-    ['beginning', 'God', 'created'],
-    ['God', 'created', 'the'],
-    ['created', 'the', 'heavens'],
-    ['the', 'heavens', 'and'],
-    ['heavens', 'and', 'the'],
-    ['and', 'the', 'earth.'],
-    ['the', 'earth.', 'END'],
-    ['earth.', 'END', 'END'],
-  ];
+/* EXPECTED TEST OUTPUTS */
+const simpleBigramResults = [
+  ['In', 'the'],
+  ['the', 'beginning'],
+  ['beginning', 'God'],
+  ['God', 'created'],
+  ['created', 'the'],
+  ['the', 'heavens'],
+  ['heavens', 'and'],
+  ['and', 'the'],
+  ['the', 'earth.'],
+];
+const simpleBigramResultsPadded = [
+  [null, 'In'],
+  ['In', 'the'],
+  ['the', 'beginning'],
+  ['beginning', 'God'],
+  ['God', 'created'],
+  ['created', 'the'],
+  ['the', 'heavens'],
+  ['heavens', 'and'],
+  ['and', 'the'],
+  ['the', 'earth.'],
+  ['earth.', null],
+];
+const simpleBigramResultsCustom = [
+  ['In', 'the'],
+  ['the', 'beginning'],
+  ['beginning', 'God'],
+  ['God', 'created'],
+  ['created', 'the'],
+  ['the', 'heavens'],
+  ['heavens', 'and'],
+  ['and', 'the'],
+  ['the', 'earth.'],
+  ['earth.', 'END'],
+];
+const simpleTrigramResults = [
+  ['In', 'the', 'beginning'],
+  ['the', 'beginning', 'God'],
+  ['beginning', 'God', 'created'],
+  ['God', 'created', 'the'],
+  ['created', 'the', 'heavens'],
+  ['the', 'heavens', 'and'],
+  ['heavens', 'and', 'the'],
+  ['and', 'the', 'earth.'],
+];
+const simpleTrigramResultsPadded = [
+  [null, null, 'In'],
+  [null, 'In', 'the'],
+  ['In', 'the', 'beginning'],
+  ['the', 'beginning', 'God'],
+  ['beginning', 'God', 'created'],
+  ['God', 'created', 'the'],
+  ['created', 'the', 'heavens'],
+  ['the', 'heavens', 'and'],
+  ['heavens', 'and', 'the'],
+  ['and', 'the', 'earth'],
+  ['the', 'earth.', null],
+  ['earth.', null, null],
+];
+const simpleTrigramResultsCustom = [
+  ['START', 'START', 'In'],
+  ['START', 'In', 'the'],
+  ['In', 'the', 'beginning'],
+  ['the', 'beginning', 'God'],
+  ['beginning', 'God', 'created'],
+  ['God', 'created', 'the'],
+  ['created', 'the', 'heavens'],
+  ['the', 'heavens', 'and'],
+  ['heavens', 'and', 'the'],
+  ['and', 'the', 'earth.'],
+  ['the', 'earth.', 'END'],
+  ['earth.', 'END', 'END'],
+];
 
-  /* eslint-disable indent */
-  /** TESTS */
+/* eslint-disable indent */
 
-  /** SIMPLE */
+/** SIMPLE */
 
-      /** ASYNC */
+  /** BIGRAM */
 
-        /** BIGRAM */
+    /** DEFAULT */
+    console.log('START - simple - bigram - default');
+    const syncBigramDef = nGram(simpleStr, 2);
+    deepCompare(syncBigramDef, simpleBigramResults);
+    console.log('END   - simple - bigram - default');
 
-          /** DEFAULT */
-          console.log('START - simple - async - bigram - default');
-          const asyncBigramDef = await ngrams.from(simpleStr, 2);
-          deepCompare(asyncBigramDef, simpleBigramResults);
-          console.log('END   - simple - async - bigram - default');
+    /** PADDED */
+    console.log('START - simple - bigram - padded');
+    const syncBigramPadded = nGram(simpleStr, 2, true);
+    deepCompare(syncBigramPadded, simpleBigramResultsPadded);
+    console.log('END   - simple - bigram - padded');
 
-          /** PADDED */
-          console.log('START - simple - async - bigram - padded');
-          const asyncBigramPadded = await ngrams.from(simpleStr, 2, true);
-          deepCompare(asyncBigramPadded, simpleBigramResultsPadded);
-          console.log('END   - simple - async - bigram - padded');
+    /** CUSTOM PADDED */
+    console.log('START - simple - bigram - custom');
+    const syncBigramCustom = nGram(simpleStr, 2, [undefined, 'END']);
+    deepCompare(syncBigramCustom, simpleBigramResultsCustom);
+    console.log('END   - simple - bigram - custom');
 
-          /** CUSTOM PADDED */
-          console.log('START - simple - async - bigram - custom');
-          const asyncBigramCustom = await ngrams.from(simpleStr, 2, [undefined, 'END']);
-          deepCompare(asyncBigramCustom, simpleBigramResultsCustom);
-          console.log('END   - simple - async - bigram - custom');
+  /** TRIGRAM */
 
-        /** TRIGRAM */
+    /** DEFAULT */
+    console.log('START - simple - trigram - default');
+    const syncTrigramDef = nGram(simpleStr, 3);
+    deepCompare(syncTrigramDef, simpleTrigramResults);
+    console.log('END   - simple - trigram - default');
 
-          /** DEFAULT */
-          console.log('START - simple - async - trigram - default');
-          const asyncTrigramDef = await ngrams.from(simpleStr, 3);
-          deepCompare(asyncTrigramDef, simpleTrigramResults);
-          console.log('END   - simple - async - trigram - default');
+    /** PADDED */
+    console.log('START - simple - trigram - padded');
+    const syncTrigramPadded = nGram(simpleStr, 3, true);
+    deepCompare(syncTrigramPadded, simpleTrigramResultsPadded);
+    console.log('END   - simple - trigram - padded');
 
-          /** PADDED */
-          console.log('START - simple - async - trigram - padded');
-          const asyncTrigramPadded = await ngrams.from(simpleStr, 3, true);
-          deepCompare(asyncTrigramPadded, simpleTrigramResultsPadded);
-          console.log('END   - simple - async - trigram - padded');
+    /** CUSTOM PADDED */
+    console.log('START - simple - trigram - custom');
+    const syncTrigramCustom = nGram(simpleStr, 3, ['START', 'END']);
+    deepCompare(syncTrigramCustom, simpleTrigramResultsCustom);
+    console.log('END   - simple - trigram - custom');
 
-          /** CUSTOM PADDED */
-          console.log('START - simple - async - trigram - custom');
-          const asyncTrigramCustom = await ngrams.from(simpleStr, 3, ['START', 'END']);
-          deepCompare(asyncTrigramCustom, simpleTrigramResultsCustom);
-          console.log('END   - simple - async - trigram - custom');
-
-      /** SYNC */
-
-        /** BIGRAM */
-
-          /** DEFAULT */
-          console.log('START - simple - sync - bigram - default');
-          const syncBigramDef = ngrams.fromSync(simpleStr, 2);
-          deepCompare(syncBigramDef, simpleBigramResults);
-          console.log('END   - simple - sync - bigram - default');
-
-          /** PADDED */
-          console.log('START - simple - async - bigram - padded');
-          const syncBigramPadded = ngrams.fromSync(simpleStr, 2, true);
-          deepCompare(syncBigramPadded, simpleBigramResultsPadded);
-          console.log('END   - simple - sync - bigram - padded');
-
-          /** CUSTOM PADDED */
-          console.log('START - simple - sync - bigram - custom');
-          const syncBigramCustom = ngrams.fromSync(simpleStr, 2, [undefined, 'END']);
-          deepCompare(syncBigramCustom, simpleBigramResultsCustom);
-          console.log('END   - simple - sync - bigram - custom');
-
-        /** TRIGRAM */
-
-          /** DEFAULT */
-          console.log('START - simple - sync - trigram - default');
-          const syncTrigramDef = ngrams.fromSync(simpleStr, 3);
-          deepCompare(syncTrigramDef, simpleTrigramResults);
-          console.log('END   - simple - sync - trigram - default');
-
-          /** PADDED */
-          console.log('START - simple - sync - trigram - padded');
-          const syncTrigramPadded = ngrams.fromSync(simpleStr, 3, true);
-          deepCompare(syncTrigramPadded, simpleTrigramResultsPadded);
-          console.log('END   - simple - sync - trigram - padded');
-
-          /** CUSTOM PADDED */
-          console.log('START - simple - sync - trigram - custom');
-          const syncTrigramCustom = ngrams.fromSync(simpleStr, 3, ['START', 'END']);
-          deepCompare(syncTrigramCustom, simpleTrigramResultsCustom);
-          console.log('END   - simple - sync - trigram - custom');
-})();
+    console.log(nGram(simpleStr, 100));

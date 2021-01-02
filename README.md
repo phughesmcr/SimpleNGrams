@@ -1,4 +1,4 @@
-# SimleNGrams
+# 🗿 SimleNGrams
 
 The easiest way to get an array of n-grams from a string or array of tokens!
 
@@ -9,55 +9,48 @@ No dependencies!
   npm install --production --save simplengrams
 ```
 
+`UMD`, `IIFE`, `CJS` and `ESM` builds are available in the `./dist` directory.
+
 ## Usage
 
-SimpleNGrams exports two functions: `.from()` and `.fromSync()`.
+SimpleNGrams exports one function: `nGram()`.
 
-Both functions take the following arguments:
+The function take the following arguments:
 
 * `input` - a string or array of strings to be split into ngrams.
 * `n`     - the ngram size as a number. Defaults to 2 (i.e. bigrams).
 * `pad`   - optional padding parameter. Takes a boolean or an array. Defaults to false (i.e. no padding). See [Padding](#padding) below.
 * `splitPattern`  - optional pattern as string or RegExp to split input string by. Defaults to spaces. See [Pattern](#pattern) below.
 
-### Async
-```javascript
-const ngrams = require('simplengrams');
-const text = 'A string of text...';
-const bigrams = await ngrams.from(text, 2);
-console.log(bigrams);
-```
-
-Or, with `.then()` and `.catch()`:
-
-```javascript
-const ngrams = require('simplengrams');
-const text = 'A string of text...';
-ngrams.from(text, 3)
-  .then((trigrams) => {
-    console.log(trigrams);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
-```
-
-### Sync
-```javascript
-const ngrams = require('simplengrams');
-const text = 'A string of text...';
-const bigrams = ngrams.fromSync(text, 2);
-console.log(bigrams);
-```
-
 ## Example
 ### Input
+
+#### Module
 ```javascript
-const ngrams = require('simplengrams');
+import { nGram } from 'simplengrams';
 const text = 'In the beginning God created the heavens and the earth.';
-const bigrams = ngrams.fromSync(text, 2);
+const bigrams = nGram(text);
 console.log(bigrams);
+```
+
+#### Node
+```javascript
+const simplengrams = require('simplengrams');
+const text = 'In the beginning God created the heavens and the earth.';
+const bigrams = simplengrams.nGram(text);
+console.log(bigrams);
+```
+
+#### Browser
+Browser builds in UMD and IIFE formats can be found in the `./dist` directory.
+
+```html
+<script src="pathTo/simplengrams.min.js"></script>
+<script>
+  const text = 'In the beginning God created the heavens and the earth.';
+  const bigrams = simplengrams.nGram(text);
+  console.log(bigrams);
+</script>
 ```
 
 ### Output
@@ -108,9 +101,9 @@ N.B. Simply use `false` instead of `[undefined, undefined]` - it results in the 
 #### pad = true
 
 ```javascript
-const ngrams = require('simplengrams');
+import { nGram } from 'simplengrams';
 const text = 'In the beginning God created the heavens and the earth.';
-const bigrams = ngrams.fromSync(text, 2, true);
+const bigrams = nGram(text, 2, true);
 console.log(bigrams);
 ```
 
@@ -134,9 +127,9 @@ console.log(bigrams);
 #### pad = [undefined, 'END']
 
 ```javascript
-const ngrams = require('simplengrams');
+import { nGram } from 'simplengrams';
 const text = 'In the beginning God created the heavens and the earth.';
-const bigrams = ngrams.fromSync(text, 2, [undefined, 'END']);
+const bigrams = nGram(text, 2, [undefined, 'END']);
 console.log(bigrams);
 ```
 
@@ -159,9 +152,9 @@ console.log(bigrams);
 <a name="pattern">
 
 ## Pattern
-The pattern argument is an optional fourth argument in both `.from()` and `.fromSync()`.
+The pattern argument is an optional fourth argument.
 
-It defaults to `' '` and can take a string or a RegExp.
+It defaults to `/\s+/` and can take a string or a RegExp.
 
 If your input is an array, the pattern argument is ignored.
 
@@ -171,6 +164,6 @@ For string inputs, the pattern argument is used to split the string into tokens,
 Use `npm run test` to check any development changes against expected outputs.
 
 ## License
-&copy; 2017-20 [P. Hughes](https://www.phugh.es). All rights reserved.
+&copy; 2017-21 [P. Hughes](https://www.phugh.es). All rights reserved.
 
-Shared under the [Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-nc-sa/3.0/) license.
+Shared under the [MIT license](http://creativecommons.org/licenses/by-nc-sa/3.0/) license.
