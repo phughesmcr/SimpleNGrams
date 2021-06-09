@@ -145,5 +145,3 @@ const simpleTrigramResultsCustom = [
     const syncTrigramCustom = nGram(simpleStr, 3, ['START', 'END']);
     deepCompare(syncTrigramCustom, simpleTrigramResultsCustom);
     console.log('END   - simple - trigram - custom');
-
-    console.log(nGram(simpleStr, 100));
