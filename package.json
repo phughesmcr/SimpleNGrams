@@ -41,18 +41,16 @@
   "scripts": {
     "prebuild": "npm run clean:pre && npm run lint:fix",
     "build": "npm run build:types && rollup -c rollup.config.js",
-    "postbuild": "npm run clean:post && npm run check:es5",
+    "postbuild": "npm run clean:post",
     "build:docs": "typedoc --out docs",
     "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir types",
     "clean": "npm run clean:pre && npm run clean:post && npm run clean:docs",
     "clean:docs": "rimraf docs",
     "clean:pre": "rimraf build && rimraf dist && rimraf types",
     "clean:post": "rimraf types",
-    "lint": "eslint 'src/**/*.ts'",
-    "lint:fix": "eslint --fix 'src/**/*.ts'",
-    "check:types": "tsc --noEmit",
-    "check:es5": "npx es-check es5 ./dist/iife/*.js --verbose",
-    "check:es3": "npx es-check es3 ./dist/iife/*.js --verbose"
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint --fix \"src/**/*.ts\"",
+    "check:types": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
