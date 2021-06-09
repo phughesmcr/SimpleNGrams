@@ -38,11 +38,15 @@ function _pad(tokens: (string | null)[], n: number, pad: boolean | string[]): (s
       throw new Error(`Wrong number of elements in pad array. Expected 1 or 2, found ${pad.length}.`);
     }
   }
-  for (let i = 1; i < n; i++) {
-    if (start !== undefined) tokens.unshift(start);
-    if (end !== undefined) tokens.push(end);
+  let returnedArray = tokens;
+  if (start !== undefined) {
+    returnedArray = new Array(n - 1).fill(start).concat(tokens) as (string | null)[];
   }
-  return tokens;
+  if (end !== undefined) {
+    const endArray = new Array(n - 1).fill(end);
+    returnedArray = returnedArray.concat(endArray);
+  }
+  return returnedArray;
 }
 
 function _split(tokens: (string | null)[], n: number, pad: boolean | string[]): (string | null)[][] {
