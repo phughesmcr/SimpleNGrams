@@ -74,7 +74,7 @@ Browser builds in UMD and IIFE formats can be found in the `./dist` directory.
 ## Padding
 Custom padding options can be used to add right and left padding to the output array.
 
-The padding argument is the third argument in both `.from()` and `.fromSync()`. It takes a boolean (i.e. `true` or `false`) or an array.
+The padding argument is the third argument in `nGram()`. It takes a boolean (i.e. `true` or `false`) or an array.
 
 The padding option defaults to `false` if it is not supplied.
 
@@ -92,7 +92,7 @@ You can disable individual padding by using `undefined` like so:
 
 * `[undefined, 'BAR']` will disable left padding and use `'BAR'` as right padding.
 
-N.B. `null` will cause the padder to use the `null` element literally. Use `undefined` only to disable padding.
+N.B. `null` will cause the padder to use the `null` element literally. Use `undefined` instead to disable padding.
 
 N.B. Simply use `false` instead of `[undefined, undefined]` - it results in the same output but is slightly faster.
 
@@ -152,7 +152,7 @@ console.log(bigrams);
 <a name="pattern">
 
 ## Pattern
-The pattern argument is an optional fourth argument.
+The pattern argument is an optional fourth argument of `nGram()`.
 
 It defaults to `/\s+/` and can take a string or a RegExp.
 
