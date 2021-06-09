@@ -87,7 +87,7 @@ function _isInputValid(input: unknown, n: unknown, pad: unknown, splitPattern: u
  * @param splitPattern pattern used to split strings into tokens. Defaults to /\s+/.
  */
 export function nGram(input: string | string[], n = 2, pad: boolean | string[] = false, splitPattern: string | RegExp = /\s+/): (string | null)[][] {
-  if (_isInputValid(input, n, pad, splitPattern)) {
+  if (_isInputValid(input, n, pad, splitPattern) === true) {
     if (typeof input === 'string') {
       input = input.split(splitPattern);
     }
@@ -97,7 +97,7 @@ export function nGram(input: string | string[], n = 2, pad: boolean | string[] =
       return _split(input, n, pad);
     }
   } else {
-    throw new TypeError(
+    throw new SyntaxError(
       'Invalid arguments. Expected nGram(string | string[], number, boolean | string[], string | RegExp)'
     );
   }

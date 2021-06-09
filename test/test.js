@@ -1,5 +1,5 @@
 'use strict';
-import { ngram, nGram } from '../dist/esm/index.min.js'
+import { nGram } from '../dist/esm/index.min.js'
 
 /**
  * @param {Array} a the input
