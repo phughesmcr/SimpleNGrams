@@ -41,7 +41,7 @@
     "prebuild": "npm run clean:pre && npm run lint:fix",
     "build": "npm run build:types && rollup -c rollup.config.js",
     "postbuild": "npm run clean:post",
-    "build:docs": "typedoc --out docs",
+    "build:docs": "npx typedoc src/index.ts --out docs",
     "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir types",
     "clean": "npm run clean:pre && npm run clean:post && npm run clean:docs",
     "clean:docs": "rimraf docs",
@@ -49,7 +49,8 @@
     "clean:post": "rimraf types",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "eslint --fix \"src/**/*.ts\"",
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
