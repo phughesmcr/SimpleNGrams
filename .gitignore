@@ -1,5 +1,1 @@
-build/
-node_modules/
-types/
-.env
-package-lock.json
+node_modules
