@@ -86,6 +86,14 @@ function _split(tokens, n, pad) {
  * @param {boolean | string[]} [pad=false] pad the output array? Defaults to false.
  * @param {string | RegExp} [splitPattern=/\s+/] pattern used to split strings into tokens. Defaults to /\s+/.
  * @returns {(string | null)[][]} array of ngrams
+ *
+ * @example
+ * ```javascript
+ * import { nGram } from 'simplengrams';
+ * const txt = 'A string of text';
+ * const bigrams = nGram(txt);
+ * console.log(bigrams); // [['A', 'string'], ['string', 'of'], ['of', 'text']]
+ * ```
  */
 export function nGram(input, n = 2, pad = false, splitPattern = /\s+/) {
   const arr = Array.isArray(input) ? input : input.split(splitPattern);
