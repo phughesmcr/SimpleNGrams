@@ -72,7 +72,7 @@ function _split(tokens, n, pad) {
   for (let i = 0; i < len; i++) {
     const grams = [];
     for (let j = 0; j < n; j++) {
-      grams.push(tokens[i + n + (j - n)]);
+      grams.push(tokens[i + n + (j - n)] ?? null);
     }
     output.push(grams);
   }
