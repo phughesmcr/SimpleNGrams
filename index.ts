@@ -1,11 +1,13 @@
 /**
  * SimpleNGrams
+ * v4.0.3
  *
  * Help me make this better:
  * https://github.com/phughesmcr/simplengrams
  *
  * @module       SimpleNGrams
  * @description  Returns a 2d array of n-grams
+ * @version      4.0.3
  * @exports      nGram
  * @author       P. Hughes <github@phugh.es> (https://www.phugh.es)
  * @copyright    2017-24 P. Hughes. All rights reserved.
