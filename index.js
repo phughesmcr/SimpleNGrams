@@ -103,3 +103,4 @@ export function nGram(input, n = 2, pad = false, splitPattern = /\s+/) {
     return _split(arr, n, pad);
   }
 }
+//# sourceMappingURL=index.js.map
