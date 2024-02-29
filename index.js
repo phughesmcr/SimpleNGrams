@@ -90,7 +90,7 @@ function _split(tokens, n, pad) {
 export function nGram(input, n = 2, pad = false, splitPattern = /\s+/) {
   const arr = Array.isArray(input) ? input : input.split(splitPattern);
   if (n > arr.length && pad === false) {
-    return [...arr];
+    return [[...arr]];
   } else {
     return _split(arr, n, pad);
   }
