@@ -1,5 +1,5 @@
 {
   "name": "@phughesmcr/simplengrams",
   "version": "4.0.2",
-  "exports": "./index.js"
+  "exports": "./index.ts"
 }

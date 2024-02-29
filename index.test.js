@@ -1,5 +1,5 @@
 "use strict";
-import { nGram } from "./index.js";
+import { nGram } from "./index.ts";
 
 /**
  * @param {Array} a the input
