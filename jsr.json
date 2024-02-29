@@ -1,0 +1,5 @@
+{
+  "name": "@phughesmcr/simplengrams",
+  "version": "4.0.1",
+  "exports": "./index.js"
+}
